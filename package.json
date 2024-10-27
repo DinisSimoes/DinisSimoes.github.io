@@ -5,7 +5,6 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --output-path docs",
-    "postbuild": "cp -r docs/* ./",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
