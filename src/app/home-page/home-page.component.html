@@ -3,21 +3,21 @@
   <div class="flex h-full">
     <!-- Div ocupando 25% -->
     <div
-      class="w-1/4 bg-componentLightBackground dark:bg-componentDarkBackground text-lightText dark:text-darkText p-4 text-white rounded-xl"
+      class="w-1/4 bg-componentLightBackground dark:bg-componentDarkBackground text-lightText dark:text-darkText p-4 text-white rounded-xl flex flex-col justify-between"
     >
       <div>frame</div>
       <div>
         <p>redes sociais</p>
       </div>
-      <div>
-        <p-button label="CV" icon="pi pi-download"></p-button>
+      <div class="w-full">
+        <p-button label="{{buttonDownloadCV }}" icon="pi pi-download" class="p-button p-component w-full flex items-center justify-center"></p-button>
       </div>
     </div>
     <div class="w-3/4 pl-4 text-white h-full flex flex-col">
-      <div class="flex w-full pl-12">
-        <div class="w-11/12">
+      <div class="flex w-full">
+        <div class="w-10/12">
           <mat-toolbar
-            class="bg-brown-500 rounded-full justify-center p-4 bg-componentLightBackground dark:bg-componentDarkBackground"
+            class="rounded-full justify-center p-4 !bg-componentLightBackground dark:!bg-componentDarkBackground"
           >
             <nav class="flex items-center gap-4">
               <a
@@ -38,7 +38,14 @@
             </nav>
           </mat-toolbar>
         </div>
-        <div class="w-1/12 flex items-center justify-center">
+        <div class="w-2/12 flex items-center justify-center">
+          <p-toggleButton
+            [onLabel]="'PT'"
+            [offLabel]="'EN'"
+            [(ngModel)]="currentLanguage"
+            (onChange)="toggleLanguage($event)"
+            class="p-button-rounded p-button-outlined ml-auto"
+          ></p-toggleButton>
           <p-toggleButton
             [onIcon]="'pi pi-sun'"
             [offIcon]="'pi pi-moon'"
@@ -51,7 +58,7 @@
       <div
         class="bg-componentLightBackground dark:bg-componentDarkBackground rounded-xl mt-4 h-full p-8"
       >
-        conteudo
+        {{conteudo }}
       </div>
     </div>
   </div>

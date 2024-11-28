@@ -8,6 +8,7 @@ import { GLTFLoader } from 'three-stdlib';
 import { ThemeService } from '../Services/theme.service';
 import { FormsModule } from '@angular/forms';
 import { ToggleButtonModule } from 'primeng/togglebutton';
+import { LanguageService } from '../Services/language.service';
 
 @Component({
   selector: 'app-home-page',
@@ -19,18 +20,36 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
 export class HomePageComponent {
 
   currentTheme: 'light' | 'dark' = 'light';
+  currentLanguage: 'PT' | 'EN' = 'PT';
 
-  constructor(private themeService: ThemeService) {}
+
+  constructor(private themeService: ThemeService, private languageService: LanguageService) {}
   
   ngOnInit() {
     this.currentTheme = this.themeService.getTheme();
     this.themeService.setTheme(this.currentTheme);
+    this.currentLanguage = this.languageService.getLanguage();
+    this.languageService.setLanguage(this.currentLanguage);
     this.init3DModel();
+  }
+
+  get buttonDownloadCV(): string {
+    return this.languageService.getTranslation('buttonDownloadCV');
+  }
+
+  get conteudo(): string {
+    return this.languageService.getTranslation('conteudo');
   }
 
   toggleTheme(event: any): void {
     const newTheme = event.checked ? 'dark' : 'light';  // Define o tema baseado no toggle
     this.themeService.setTheme(newTheme);
+  }
+
+  toggleLanguage(event: any): void {
+    const newLanguage = event.checked ? 'EN' : 'PT';  // Define o idioma baseado no toggle
+    this.languageService.setLanguage(newLanguage);
+    console.log(this.languageService.getLanguage());
   }
   
   init3DModel() {
