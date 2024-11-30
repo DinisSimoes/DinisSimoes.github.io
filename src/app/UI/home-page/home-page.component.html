@@ -20,21 +20,19 @@
             class="rounded-full justify-center p-4 !bg-componentLightBackground dark:!bg-componentDarkBackground"
           >
             <nav class="flex items-center gap-4">
-              <a
-                mat-button
-                routerLink="/"
-                routerLinkActive="active-link"
-                [routerLinkActiveOptions]="{ exact: true }"
-                >Sobre mim</a
-              >
-              <span class="w-2 h-2 bg-black rounded-full"></span>
-              <a mat-button routerLink="/sobre" routerLinkActive="active-link"
-                >Laboratorio</a
-              >
-              <span class="w-2 h-2 bg-black rounded-full"></span>
-              <a mat-button routerLink="/contato" routerLinkActive="active-link"
-                >Contato</a
-              >
+              <ng-container *ngFor="let item of menuList">
+                <a
+                  mat-button
+                  [routerLink]="item.name"
+                  (click)="menuClick(item)"
+                >
+                  {{ item.description }}
+                </a>
+                <span
+                  class="w-2 h-2 bg-black rounded-full"
+                  *ngIf="item !== menuList[menuList.length - 1]"
+                ></span>
+              </ng-container>
             </nav>
           </mat-toolbar>
         </div>
@@ -58,7 +56,8 @@
       <div
         class="bg-componentLightBackground dark:bg-componentDarkBackground rounded-xl mt-4 h-full p-8"
       >
-        {{conteudo }}
+        <router-outlet></router-outlet>
+        <app-page-about></app-page-about>
       </div>
     </div>
   </div>

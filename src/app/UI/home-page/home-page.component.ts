@@ -5,15 +5,22 @@ import { ButtonModule } from 'primeng/button';
 import { RouterModule } from '@angular/router'; 
 import * as THREE from 'three';
 import { GLTFLoader } from 'three-stdlib';
-import { ThemeService } from '../Services/theme.service';
+import { ThemeService } from '../../Services/theme.service';
 import { FormsModule } from '@angular/forms';
 import { ToggleButtonModule } from 'primeng/togglebutton';
-import { LanguageService } from '../Services/language.service';
+import { LanguageService } from '../../Services/language.service';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { menu_enum } from '../../Models/menu_enum';
+import { menus_name } from '../../Models/menus_name';
+import { MenuNamesService } from '../../Services/menu-names.service';
+import { CommonModule } from '@angular/common';
+import { PageAboutComponent } from "../page-about/page-about.component";
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [MatToolbarModule, MatButtonModule, ButtonModule, RouterModule, FormsModule, ToggleButtonModule],
+  imports: [MatToolbarModule, MatButtonModule, ButtonModule, RouterModule, FormsModule, ToggleButtonModule, MatSidenavModule, MatListModule, CommonModule, PageAboutComponent],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss'
 })
@@ -22,14 +29,20 @@ export class HomePageComponent {
   currentTheme: 'light' | 'dark' = 'light';
   currentLanguage: 'PT' | 'EN' = 'PT';
 
+  activeComponent: menu_enum = menu_enum.About;
+  menu_enum = menu_enum;
+  component_name = '';
+  menuList: menus_name[] = [];
 
-  constructor(private themeService: ThemeService, private languageService: LanguageService) {}
+  constructor(private themeService: ThemeService, private languageService: LanguageService, private menuNamesService: MenuNamesService) {}
   
   ngOnInit() {
     this.currentTheme = this.themeService.getTheme();
     this.themeService.setTheme(this.currentTheme);
     this.currentLanguage = this.languageService.getLanguage();
     this.languageService.setLanguage(this.currentLanguage);
+    this.menuList = this.menuNamesService.getMenuList();
+    this.component_name = this.menuList[0].description;
     this.init3DModel();
   }
 
@@ -97,4 +110,14 @@ export class HomePageComponent {
   }
 
   
+  
+  menuClick(menu: menus_name) {
+    this.component_name = menu.description;
+    this.setActiveComponent(menu.name as menu_enum);
+  }
+
+  setActiveComponent(menu: menu_enum) {
+    this.activeComponent = menu;
+  }
+
 }
