@@ -1,1 +1,19 @@
-<p>page-lab works!</p>
+<h3>
+    {{lab_title}}
+</h3>
+<p>
+    {{lab_subtitle}}
+</p>
+<p>
+    {{lab_content}}
+</p>
+<p>
+    {{lab_content2}}
+</p>
+<p>{{lab_caution}}</p>
+
+<div>
+    <div class="card flex justify-content-center">
+        <p-button label="{{lab_button}}" icon="pi pi-eye" (click)="btnShowLab()"></p-button>
+    </div>
+</div>
