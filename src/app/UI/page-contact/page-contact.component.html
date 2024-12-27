@@ -1,46 +1,72 @@
-<p>page-contact works!</p>
-
-
-<div>
-    <div class="flex flex-column gap-2">
-        <label for="username">Username</label>
-        <input 
-            pInputText 
-            id="username" 
-            aria-describedby="username-help" 
-            [(ngModel)]="value" />
-        <small id="username-help">
-            Enter your username to reset your password.
-        </small>
-    </div>
-</div>
-
-<div class="flex flex-column gap-2">
-    <label for="username">Username</label>
-    <input 
+<div class="">
+    <!-- <h2 class="text-2xl font-semibold text-center mb-4">Contact Us</h2> -->
+    <h2 class="font-semibold text-center">{{contact_title}}</h2>
+    
+    <!-- Nome Completo -->
+    <div class="flex flex-column gap-16 mb-4">
+      <input 
         pInputText 
-        id="username" 
-        aria-describedby="username-help" 
-        [(ngModel)]="value" />
-    <small id="username-help">
-        Enter your username to reset your password.
-    </small>
-</div>
-
-<div>
-    <p-floatLabel>
-        <textarea 
-            id="float-input" 
-            rows="5" cols="30" 
-            pInputTextarea>
-        </textarea>
-        <label for="float-input">Summary</label>
-    </p-floatLabel>
-</div>
-
-<div>
-    <div class="card flex justify-content-center">
-        <p-button label="Check" icon="pi pi-check"></p-button>
+        id="name" 
+        placeholder="{{placeholderName}}" 
+        [(ngModel)]="contactForm.name" 
+        class="w-full border border-gray-300 rounded-md p-2 text-black" 
+        required 
+        aria-required="true" />
     </div>
-</div>
-
+  
+    <!-- Email -->
+    <div class="flex flex-column gap-2 mb-4">
+      <input 
+        pInputText 
+        id="email" 
+        placeholder="{{placeholderEmail}}" 
+        type="email" 
+        [(ngModel)]="contactForm.email" 
+        class="w-full border border-gray-300 rounded-md p-2 text-black" 
+        
+        required 
+        aria-required="true" />
+    </div>
+  
+    <!-- Telefone -->
+    <div class="flex flex-column gap-2 mb-4">
+      <input 
+        pInputText 
+        id="phone" 
+        placeholder="{{placeholderPhone}}" 
+        type="tel" 
+        [(ngModel)]="contactForm.phone" 
+        class="w-full border border-gray-300 rounded-md p-2 text-black" />
+    </div>
+  
+    <!-- Mensagem -->
+    <div class="flex flex-column gap-2 mb-4">
+        <textarea 
+          id="message" 
+          rows="5" 
+          pInputTextarea 
+          placeholder="{{placeholderMessage}}" 
+          [(ngModel)]="contactForm.message" 
+          class="w-full border border-gray-300 rounded-md p-2 text-black"></textarea>
+      
+    </div>
+  
+    <!-- Preferência de Contato -->
+    <div class="flex gap-2 align-items-center mb-4">
+        <div class="w-full">
+          <p-dropdown 
+            id="contact-method" 
+            [options]="contactMethods" 
+            [(ngModel)]="contactForm.preferredContactMethod" 
+            placeholder="{{placeholderContactPreference}}" 
+            class="w-full"></p-dropdown>
+        </div>
+        <p-button 
+          label="{{btnSendMessage}}" 
+          icon="pi pi-send" 
+          class="w-auto" 
+          (onClick)="sendMessage()" 
+          [disabled]="!isFormValid()"></p-button>
+      </div>
+  </div>
+  

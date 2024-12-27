@@ -4,6 +4,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { FormsModule } from '@angular/forms';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
+import { LanguageService } from '../../Services/language.service';
 
 @Component({
   selector: 'app-page-about',
@@ -14,4 +15,29 @@ import { InputTextModule } from 'primeng/inputtext';
 })
 export class PageAboutComponent {
 value:string="teste";
+constructor(private languageService: LanguageService) { }
+
+  get about_title(): string {
+    return this.languageService.getTranslation('about_title');
+  }
+
+  get about_fellings(): string {
+    return this.languageService.getTranslation('about_fellings');
+  }
+
+  get about_content(): string {
+    return this.languageService.getTranslation('about_content');
+  }
+
+  get about_content2(): string {
+    return this.languageService.getTranslation('about_content2');
+  }
+
+  get about_habilities(): string {
+    return this.languageService.getTranslation('about_habilities');
+  }
+
+  get about_skill(): string {
+    return this.languageService.getTranslation('about_skill');
+  }
 }
