@@ -44,6 +44,11 @@ export class HomePageComponent {
     this.menuList = this.menuNamesService.getMenuList();
     this.component_name = this.menuList[0].description;
     this.init3DModel();
+
+    this.languageService.language$.subscribe(() => {
+      this.menuList = this.menuNamesService.getMenuList();
+      this.component_name = this.menuList[0].description;
+    });
   }
 
   get buttonDownloadCV(): string {
