@@ -1,2 +1,78 @@
-<p>page-about works!</p>
+<h3>{{about_title}}</h3>
 
+<p>{{about_fellings}}</p>
+<p>
+{{about_content}}
+</p>
+<p>{{about_content2}}
+</p>
+
+<div class="w-full max-w-4xl mx-auto p-6 space-y-6">
+  <h3 class="text-center text-2xl font-bold mb-6">{{about_habilities}}</h3>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="bg-lightAccent bg-text-lightText rounded-lg p-4 shadow-md">
+      <h4 class="text-lg font-bold mb-4">Backend</h4>
+      <div class="grid grid-cols-2 gap-4">
+        <ul class="space-y-1">
+          <li>C#</li>
+          <li>.NET</li>
+          <li>.NET Core</li>
+          <li>Web API Rest</li>
+        </ul>
+        <ul class="space-y-1">
+          <li>xUnit (Unit Tests)</li>
+          <li>SQL (SQL Server, Postgres, SQLite)</li>
+          <li>NoSQL (MongoDB)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bg-lightAccent bg-text-lightText text-white rounded-lg p-4 shadow-md">
+      <h4 class="text-lg font-bold mb-4">Frontend</h4>
+      <div class="grid grid-cols-2 gap-4">
+        <ul class="space-y-1">
+          <li>Angular</li>
+          <li>HTML</li>
+          <li>CSS (SCSS)</li>
+          <li>Typescript</li>
+        </ul>
+        <ul class="space-y-1">
+          <li>Bootstrap</li>
+          <li>Tailwind CSS</li>
+          <li>PrimeNG</li>
+          <li>Jasmine (Unit Tests)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bg-lightAccent bg-text-lightText text-white rounded-lg p-4 shadow-md">
+      <h4 class="text-lg font-bold mb-4">Cloud/Git</h4>
+      <div class="grid grid-cols-2 gap-4">
+        <ul class="space-y-1">
+          <li>Git</li>
+          <li>Github</li>
+          <li>Azure Cloud</li>
+        </ul>
+        <ul class="space-y-1">
+          <li>Azure Devops</li>
+          <li>AWS Cloud</li>
+          <li>CI/CD</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bg-lightAccent bg-text-lightText text-white rounded-lg p-4 shadow-md">
+      <h4 class="text-lg font-bold mb-4">{{about_skill}}</h4>
+      <div class="grid grid-cols-2 gap-4">
+        <ul class="space-y-1">
+          <li>Clean Code</li>
+          <li>SOLID</li>
+        </ul>
+        <ul class="space-y-1">
+          <li>KISS</li>
+          <li>DRY</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
