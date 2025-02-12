@@ -59,6 +59,22 @@ export class HomePageComponent {
     return this.languageService.getTranslation('conteudo');
   }
 
+  get home_resume_1(): string {
+    return this.languageService.getTranslation('home_resume_1');
+  }
+
+  get home_resume_2(): string {
+    return this.languageService.getTranslation('home_resume_2');
+  }
+
+  get home_resume_3(): string {
+    return this.languageService.getTranslation('home_resume_3');
+  }
+
+  get home_resume_4(): string {
+    return this.languageService.getTranslation('home_resume_4');
+  }
+
   toggleTheme(event: any): void {
     const newTheme = event.checked ? 'dark' : 'light';  // Define o tema baseado no toggle
     this.themeService.setTheme(newTheme);

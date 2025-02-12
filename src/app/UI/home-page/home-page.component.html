@@ -1,52 +1,51 @@
-<div class="h-full p-10 bg-lightBackground dark:bg-darkBackground">
-  <!-- <div #avatarContainer style="width: 10%; height: 50px;"></div> -->
-  <div class="flex h-full">
-    <!-- Div ocupando 25% -->
+<div class="min-h-screen p-4 md:p-10 bg-lightBackground dark:bg-darkBackground">
+  <div class="flex flex-col md:flex-row min-h-screen gap-4">
+    <!-- Sidebar -->
     <div
-      class="w-1/4 bg-componentLightBackground dark:bg-componentDarkBackground text-lightText dark:text-darkText p-4 text-white rounded-xl flex flex-col justify-between"
+      class="w-full md:w-1/4 bg-componentLightBackground dark:bg-componentDarkBackground text-lightText dark:text-darkText p-4 rounded-xl flex flex-col justify-between"
     >
-      <div class="flex justify-center pt-12">
-        <img src="/images/foto_perfil.jpg" alt="Minha Imagem" />
+      <div class="flex justify-center pt-6 md:pt-12">
+        <img src="/images/foto_perfil.jpg" alt="Minha Imagem" class="w-24 md:w-32 rounded-full" />
       </div>
-      <div class="p-4 bg-componentLightBackground dark:bg-componentDarkBackground rounded-xl">
-        <ul class="list-none space-y-2 text-lightText dark:text-darkText">
+      <div class="p-4 bg-componentLightBackground dark:bg-componentDarkBackground rounded-xl mt-4">
+        <ul class="list-none space-y-2 text-lightText dark:text-darkText text-sm md:text-base">
           <li class="flex items-center gap-2">
             <i class="pi pi-code text-primary"></i>
-            <span>+5 anos transformando códigos em sorrisos</span>
+            <span>{{home_resume_1}}</span>
           </li>
           <li class="flex items-center gap-2">
             <i class="pi pi-user text-primary"></i>
-            <span>Desenvolvedor Full Stack</span>
+            <span>{{home_resume_2}}</span>
           </li>
           <li class="flex items-center gap-2">
             <i class="pi pi-lightbulb text-primary"></i>
-            <span>Apaixonado por criar soluções inovadoras</span>
+            <span>{{home_resume_3}}</span>
           </li>
           <li class="flex items-center gap-2">
             <i class="pi pi-headphones text-primary"></i>
-            <span>Gamer, leitor e escuto música nas horas vagas</span>
+            <span>{{home_resume_4}}</span>
           </li>
         </ul>
       </div>
-      <div class="flex justify-center">
+      <div class="flex justify-center mt-4">
         <div class="flex gap-4">
           <a
             href="https://www.linkedin.com/in/dinis-f-simoes/"
             target="_blank"
-            class="text-lightText dark:text-darkText hover:text-primary"
+            class="text-lightText dark:text-darkText hover:text-primary text-xl"
           >
-            <i class="pi pi-linkedin text-2xl"></i>
+            <i class="pi pi-linkedin"></i>
           </a>
           <a
             href="https://github.com/DinisSimoes"
             target="_blank"
-            class="text-lightText dark:text-darkText hover:text-primary"
+            class="text-lightText dark:text-darkText hover:text-primary text-xl"
           >
-            <i class="pi pi-github text-2xl"></i>
+            <i class="pi pi-github"></i>
           </a>
         </div>
       </div>
-      <div class="w-full">
+      <div class="w-full mt-4">
         <p-button
           label="{{ buttonDownloadCV }}"
           icon="pi pi-download"
@@ -54,13 +53,15 @@
         ></p-button>
       </div>
     </div>
-    <div class="w-3/4 pl-4 text-white h-full flex flex-col">
-      <div class="flex w-full">
-        <div class="w-10/12">
+
+    <!-- Main Content -->
+    <div class="w-full md:w-3/4 flex flex-col min-h-screen overflow-auto">
+      <div class="flex flex-col md:flex-row w-full items-center">
+        <div class="w-full md:w-10/12">
           <mat-toolbar
             class="rounded-full justify-center p-4 !bg-componentLightBackground dark:!bg-componentDarkBackground"
           >
-            <nav class="flex items-center gap-4">
+            <nav class="flex flex-wrap justify-center items-center gap-4">
               <ng-container *ngFor="let item of menuList">
                 <a
                   mat-button
@@ -71,35 +72,34 @@
                   {{ item.description }}
                 </a>
                 <span
-                  class="w-2 h-2 bg-lightText dark:bg-darkText rounded-full"
+                  class="w-2 h-2 bg-lightText dark:bg-darkText rounded-full hidden md:inline-block"
                   *ngIf="item !== menuList[menuList.length - 1]"
                 ></span>
               </ng-container>
             </nav>
           </mat-toolbar>
         </div>
-        <div class="w-2/12 flex items-center justify-center">
+        <div class="w-full md:w-2/12 flex justify-center gap-2 mt-4 md:mt-0">
           <p-toggleButton
             [onLabel]="'PT'"
             [offLabel]="'EN'"
             [(ngModel)]="currentLanguage"
             (onChange)="toggleLanguage($event)"
-            class="p-button-rounded p-button-outlined ml-auto"
+            class="p-button-rounded p-button-outlined"
           ></p-toggleButton>
           <p-toggleButton
             [onIcon]="'pi pi-sun'"
             [offIcon]="'pi pi-moon'"
             [(ngModel)]="currentTheme"
             (onChange)="toggleTheme($event)"
-            class="p-button-rounded p-button-outlined ml-auto"
+            class="p-button-rounded p-button-outlined"
           ></p-toggleButton>
         </div>
       </div>
       <div
-        class="bg-componentLightBackground dark:bg-componentDarkBackground rounded-xl mt-4 h-full p-8"
+        class="bg-componentLightBackground dark:bg-componentDarkBackground rounded-xl mt-4 h-full p-6"
       >
         <router-outlet></router-outlet>
-        <!-- <app-page-about></app-page-about> -->
       </div>
     </div>
   </div>
