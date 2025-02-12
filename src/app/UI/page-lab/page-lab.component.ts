@@ -39,6 +39,6 @@ export class PageLabComponent {
   }
 
   btnShowLab(){
-    console.log("btnShowLab");
+    alert(this.languageService.getTranslation('lab_error_message'));
   }
 }

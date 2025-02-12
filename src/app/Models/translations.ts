@@ -23,6 +23,7 @@ export const TRANSLATIONS: Record<string, Record<string, string>> = {
         contact_placeholder_message: "Escreva sua mensagem aqui...",
         contact_placeholder_preferred_contact_method: "Selecione o seu melhor meio de contato",
         contact_button: "Enviar",
+        lab_error_message: "Você clicou... e agora? Nem mesmo eu sei o que pode acontecer! Dê-me um tempo para aperfeiçoar as criaturas... Ou corra enquanto pode!"
     },
     EN:{
         buttonDownloadCV: "My CV",
@@ -49,5 +50,6 @@ export const TRANSLATIONS: Record<string, Record<string, string>> = {
         contact_placeholder_message: "Write your message here...",
         contact_placeholder_preferred_contact_method: "Select a preferred contact method",
         contact_button: "Send Message",
+        lab_error_message: "You clicked... and now? Even I don't know what could happen! Give me a moment to perfect the creatures... Or run while you can!"
     }
 }
