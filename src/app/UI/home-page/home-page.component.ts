@@ -28,6 +28,8 @@ export class HomePageComponent {
 
   currentTheme: 'light' | 'dark' = 'light';
   currentLanguage: 'PT' | 'EN' = 'PT';
+  currentThemeToogle = false;
+  currentLanguageToggle = false;
 
   activeComponent: menu_enum = menu_enum.About;
   menu_enum = menu_enum;
@@ -39,8 +41,22 @@ export class HomePageComponent {
   ngOnInit() {
     this.currentTheme = this.themeService.getTheme();
     this.themeService.setTheme(this.currentTheme);
+    if(this.currentTheme === 'dark') {
+      this.currentThemeToogle = true;
+    }
+    else{
+      this.currentThemeToogle = false;
+    }
+
     this.currentLanguage = this.languageService.getLanguage();
     this.languageService.setLanguage(this.currentLanguage);
+    if(this.currentLanguage === 'EN') {
+      this.currentLanguageToggle = true;
+    }
+    else{
+      this.currentLanguageToggle = false;
+    }
+
     this.menuList = this.menuNamesService.getMenuList();
     this.component_name = this.menuList[0].description;
     this.init3DModel();
