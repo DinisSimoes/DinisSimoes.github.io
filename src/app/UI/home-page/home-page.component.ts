@@ -2,7 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { ButtonModule } from 'primeng/button';
-import { RouterModule } from '@angular/router'; 
+import { RouterModule } from '@angular/router';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three-stdlib';
 import { ThemeService } from '../../Services/theme.service';
@@ -15,17 +15,27 @@ import { menu_enum } from '../../Models/menu_enum';
 import { menus_name } from '../../Models/menus_name';
 import { MenuNamesService } from '../../Services/menu-names.service';
 import { CommonModule } from '@angular/common';
-import { PageAboutComponent } from "../page-about/page-about.component";
+import { PageAboutComponent } from '../page-about/page-about.component';
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [MatToolbarModule, MatButtonModule, ButtonModule, RouterModule, FormsModule, ToggleButtonModule, MatSidenavModule, MatListModule, CommonModule, PageAboutComponent],
+  imports: [
+    MatToolbarModule,
+    MatButtonModule,
+    ButtonModule,
+    RouterModule,
+    FormsModule,
+    ToggleButtonModule,
+    MatSidenavModule,
+    MatListModule,
+    CommonModule,
+    PageAboutComponent,
+  ],
   templateUrl: './home-page.component.html',
-  styleUrl: './home-page.component.scss'
+  styleUrl: './home-page.component.scss',
 })
 export class HomePageComponent {
-
   currentTheme: 'light' | 'dark' = 'light';
   currentLanguage: 'PT' | 'EN' = 'PT';
   currentThemeToogle = false;
@@ -36,24 +46,26 @@ export class HomePageComponent {
   component_name = '';
   menuList: menus_name[] = [];
 
-  constructor(private themeService: ThemeService, private languageService: LanguageService, private menuNamesService: MenuNamesService) {}
-  
+  constructor(
+    private themeService: ThemeService,
+    private languageService: LanguageService,
+    private menuNamesService: MenuNamesService
+  ) {}
+
   ngOnInit() {
     this.currentTheme = this.themeService.getTheme();
     this.themeService.setTheme(this.currentTheme);
-    if(this.currentTheme === 'dark') {
+    if (this.currentTheme === 'dark') {
       this.currentThemeToogle = true;
-    }
-    else{
+    } else {
       this.currentThemeToogle = false;
     }
 
     this.currentLanguage = this.languageService.getLanguage();
     this.languageService.setLanguage(this.currentLanguage);
-    if(this.currentLanguage === 'EN') {
+    if (this.currentLanguage === 'EN') {
       this.currentLanguageToggle = true;
-    }
-    else{
+    } else {
       this.currentLanguageToggle = false;
     }
 
@@ -92,19 +104,24 @@ export class HomePageComponent {
   }
 
   toggleTheme(event: any): void {
-    const newTheme = event.checked ? 'dark' : 'light';  // Define o tema baseado no toggle
+    const newTheme = event.checked ? 'dark' : 'light'; // Define o tema baseado no toggle
     this.themeService.setTheme(newTheme);
   }
 
   toggleLanguage(event: any): void {
-    const newLanguage = event.checked ? 'EN' : 'PT';  // Define o idioma baseado no toggle
+    const newLanguage = event.checked ? 'EN' : 'PT'; // Define o idioma baseado no toggle
     this.languageService.setLanguage(newLanguage);
     console.log(this.languageService.getLanguage());
   }
-  
+
   init3DModel() {
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / 500, 0.1, 1000);
+    const camera = new THREE.PerspectiveCamera(
+      75,
+      window.innerWidth / 500,
+      0.1,
+      1000
+    );
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, 500);
 
@@ -116,38 +133,34 @@ export class HomePageComponent {
     loader.load(
       '/my_avatar.glb', // Certifique-se de que o caminho está correto
       (gltf) => {
-      const avatar = gltf.scene;
-      console.log(avatar);
-      avatar.scale.set(1, 1, 1); // Ajuste o tamanho conforme necessário
-      scene.add(avatar);
+        const avatar = gltf.scene;
+        console.log(avatar);
+        avatar.scale.set(1, 1, 1); // Ajuste o tamanho conforme necessário
+        scene.add(avatar);
 
-      avatar.position.set(0, -3.5, 0); // Move o modelo para alinhar a cabeça no centro
-      avatar.scale.set(3, 3, 3); // Aumenta o tamanho do modelo, se necessário
+        avatar.position.set(0, -3.5, 0); // Move o modelo para alinhar a cabeça no centro
+        avatar.scale.set(3, 3, 3); // Aumenta o tamanho do modelo, se necessário
 
-      // Ajuste a câmera para focar no rosto
-      camera.position.set(0, 1.6, 1); // Altura e distância da câmera
-      camera.lookAt(0, 1.6, 0);
-  },
-  undefined,
-  (error) => {
-    console.error('Erro ao carregar o modelo:', error);
-  }
-);
+        // Ajuste a câmera para focar no rosto
+        camera.position.set(0, 1.6, 1); // Altura e distância da câmera
+        camera.lookAt(0, 1.6, 0);
+      },
+      undefined,
+      (error) => {
+        console.error('Erro ao carregar o modelo:', error);
+      }
+    );
 
-  camera.position.z = 5;
+    camera.position.z = 5;
 
-  function animate() {
-    requestAnimationFrame(animate);
-    renderer.render(scene, camera);
-  }
+    function animate() {
+      requestAnimationFrame(animate);
+      renderer.render(scene, camera);
+    }
 
-  animate();
-
-    
+    animate();
   }
 
-  
-  
   menuClick(menu: menus_name) {
     this.component_name = menu.description;
     this.setActiveComponent(menu.name as menu_enum);
@@ -157,4 +170,18 @@ export class HomePageComponent {
     this.activeComponent = menu;
   }
 
+  downloadCV() {
+    const currentLanguage = this.languageService.getLanguage();
+    let cvLink: string;
+
+    if (currentLanguage === 'PT') {
+      cvLink =
+        'https://drive.google.com/file/d/1oyG_uZ1VS6GwIywXQQXss0dnNwijQDG_/view?usp=sharing';
+    } else {
+      cvLink =
+        'https://drive.google.com/file/d/1F2uEr9ESmf6SaW2aC_jXfczXShAzjhCF/view?usp=sharing';
+    }
+
+    window.open(cvLink, '_blank');
+  }
 }
