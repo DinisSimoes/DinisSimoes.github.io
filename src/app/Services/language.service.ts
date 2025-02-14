@@ -12,6 +12,22 @@ export class LanguageService {
   // Observable para mudanças de idioma
   language$ = this.languageSubject.asObservable();
 
+  constructor() {
+    this.initLanguage();
+  }
+
+  private initLanguage(): 'PT' | 'EN' {
+    const savedLanguage = localStorage.getItem(this.languageKey) as 'PT' | 'EN';
+
+    if (savedLanguage) {
+      return savedLanguage;
+    } else {
+      const browserLanguage = navigator.language.startsWith('pt') ? 'PT' : 'EN';
+      this.setLanguage(browserLanguage);
+      return browserLanguage;
+    }
+  }
+  
   setLanguage(language: 'PT' | 'EN'): void {
     document.documentElement.classList.toggle('PT', language === 'PT');
     localStorage.setItem(this.languageKey, language);
