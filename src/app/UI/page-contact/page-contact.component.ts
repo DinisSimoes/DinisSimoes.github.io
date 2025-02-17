@@ -60,20 +60,25 @@ export class PageContactComponent {
   }
   
   sendMessage() {
-    if (this.isFormValid()) {
-      console.log('Form Data:', this.contactForm);
-      // Lógica para envio de mensagem (API ou outro método)
-    } else {
-      console.error('Form is invalid.');
-    }
+    const missingFields = this.getMissingFields();
+
+  if (missingFields.length === 0) {
+    console.log('Form Data:', this.contactForm);
+  } else {
+    const message = `${this.languageService.getTranslation('contact_error_message')}\n- ${missingFields.join('\n- ')}`;
+    alert(message);
+  }
   }
   
-  isFormValid(): boolean {
-    return (
-      this.contactForm.name.trim().length > 0 &&
-      this.contactForm.email.trim().length > 0 &&
-      this.contactForm.message.trim().length > 0 &&
-      this.contactForm.preferredContactMethod.trim().length > 0
-    );
+  getMissingFields(): string[] {
+    const missingFields: string[] = [];
+  
+    if (!this.contactForm.name.trim()) missingFields.push(this.languageService.getTranslation('contact_error_fiels_name'));
+    if (!this.contactForm.email.trim()) missingFields.push(this.languageService.getTranslation('contact_error_fiels_email'));
+    if (!this.contactForm.phone.trim()) missingFields.push(this.languageService.getTranslation('contact_erro_fields_phone'));
+    if (!this.contactForm.preferredContactMethod.trim()) missingFields.push(this.languageService.getTranslation('contact_error_fiels_preferred_contact_method'));
+    if (!this.contactForm.message.trim()) missingFields.push(this.languageService.getTranslation('contact_error_fiels_message'));
+  
+    return missingFields;
   }
 }
