@@ -1,8 +1,8 @@
-<div class="min-h-screen p-4 md:p-10 bg-lightBackground dark:bg-darkBackground">
-  <div class="flex flex-col md:flex-row min-h-screen gap-4">
+<div class="h-screen flex flex-col p-4 md:p-10 bg-lightBackground dark:bg-darkBackground overflow-hidden">
+  <div class="flex flex-col md:flex-row flex-1 gap-4 overflow-hidden">
     <!-- Sidebar -->
     <div
-      class="w-full md:w-1/4 bg-componentLightBackground dark:bg-componentDarkBackground text-lightText dark:text-darkText p-4 rounded-xl flex flex-col justify-between"
+      class="w-full md:w-1/4 bg-componentLightBackground dark:bg-componentDarkBackground text-lightText dark:text-darkText p-4 rounded-xl flex flex-col justify-between h-full"
     >
       <div class="flex justify-center pt-6 md:pt-12">
         <img src="/images/fotoPerfil_DinisSimoes.png" alt="Minha Imagem" class="w-24 md:w-32 rounded-full" />
@@ -56,7 +56,7 @@
     </div>
 
     <!-- Main Content -->
-    <div class="w-full md:w-3/4 flex flex-col min-h-screen overflow-auto">
+    <div class="w-full md:w-3/4 flex flex-col overflow-hidden h-full">
       <div class="flex flex-col md:flex-row w-full items-center">
         <div class="w-full md:w-10/12">
           <mat-toolbar
