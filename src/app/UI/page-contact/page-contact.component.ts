@@ -6,6 +6,7 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
 import { LanguageService } from '../../Services/language.service';
+import { ContactService } from '../../Services/contact.service';
 
 @Component({
   selector: 'app-page-contact',
@@ -35,7 +36,7 @@ export class PageContactComponent {
     { label: 'Phone', value: 'phone' },
   ];
 
-  constructor(private languageService: LanguageService) {}
+  constructor(private languageService: LanguageService, private contactService: ContactService) {}
 
   get contact_title(): string {
     return this.languageService.getTranslation('contact_title');
@@ -67,11 +68,18 @@ export class PageContactComponent {
     return this.languageService.getTranslation('contact_button');
   }
 
-  sendMessage() {
+  async sendMessage() {
+
     const missingFields = this.getMissingFields();
 
     if (missingFields.length === 0) {
-      console.log('Form Data:', this.contactForm);
+      try {
+      await this.contactService.sendContactMessage(this.contactForm);
+      alert('Mensagem enviada com sucesso!');
+      this.contactForm = { name: '', email: '', phone: '', message: '', preferredContactMethod: '' };
+    } catch (error) {
+      alert('Erro ao enviar mensagem.');
+    }
     } else {
       const message = `${this.languageService.getTranslation(
         'contact_error_message'
