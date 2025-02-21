@@ -31,12 +31,22 @@ export class PageContactComponent {
     preferredContactMethod: '',
   };
 
-  contactMethods = [
-    { label: 'Email', value: 'email' },
-    { label: 'Phone', value: 'phone' },
-  ];
 
   constructor(private languageService: LanguageService, private contactService: ContactService) {}
+
+  ngOnInit(){
+
+  
+
+  }
+
+  get contactMethods(){
+return[
+  { label: this.languageService.getTranslation('contact_error_fiels_email'), value: 'Email' },
+  { label: this.languageService.getTranslation('contact_erro_fields_phone'), value: 'Phone' },
+]
+  }
+
 
   get contact_title(): string {
     return this.languageService.getTranslation('contact_title');
@@ -71,21 +81,28 @@ export class PageContactComponent {
   async sendMessage() {
 
     const missingFields = this.getMissingFields();
+  const errorMail = this.validateEmail();
+  const errorPhone = this.validatePhone(); 
 
-    if (missingFields.length === 0) {
+  if (missingFields.length === 0) {
+    if (!errorMail.trim() && !errorPhone.trim()) {
       try {
-      await this.contactService.sendContactMessage(this.contactForm);
-      alert('Mensagem enviada com sucesso!');
-      this.contactForm = { name: '', email: '', phone: '', message: '', preferredContactMethod: '' };
-    } catch (error) {
-      alert('Erro ao enviar mensagem.');
-    }
+        await this.contactService.sendContactMessage(this.contactForm);
+        alert('Mensagem enviada com sucesso!');
+        this.contactForm = { name: '', email: '', phone: '', message: '', preferredContactMethod: '' };
+      } catch (error) {
+        alert('Erro ao enviar mensagem.');
+      }
     } else {
-      const message = `${this.languageService.getTranslation(
-        'contact_error_message'
-      )}\n- ${missingFields.join('\n- ')}`;
-      alert(message);
+      alert(errorMail || errorPhone);
+      return;
     }
+  } else {
+    const message = `${this.languageService.getTranslation(
+      'contact_error_message'
+    )}\n- ${missingFields.join('\n- ')}`;
+    alert(message);
+  }
   }
 
   getMissingFields(): string[] {
@@ -115,5 +132,30 @@ export class PageContactComponent {
       );
 
     return missingFields;
+  }
+
+  validateEmail() {
+    let emailError ='';
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(this.contactForm.email)) {
+      emailError = this.languageService.getTranslation('contact_error_invalid_email');
+    } else {
+      emailError = '';
+    }
+
+    return emailError;
+  }
+
+  validatePhone(): string {
+    let phoneError = '';
+  
+    // Regex para números de telefone internacionais
+    const phoneRegex = /^\+?[1-9]\d{6,20}$/;
+  
+    if (!phoneRegex.test(this.contactForm.phone)) {
+      phoneError = this.languageService.getTranslation('contact_error_invalid_phone');
+    }
+  
+    return phoneError;
   }
 }

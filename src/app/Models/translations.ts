@@ -24,7 +24,7 @@ export const TRANSLATIONS: Record<string, Record<string, string>> = {
         contact_title: "Fale comigo",
         contact_placeholder_name: "Seu Nome",
         contact_placeholder_email: "Seu Email",
-        contact_placeholder_phone: "Seu Telefone",
+        contact_placeholder_phone: "Seu Celular",
         contact_placeholder_message: "Escreva sua mensagem aqui...",
         contact_placeholder_preferred_contact_method: "Melhor meio de contato",
         contact_button: "Enviar",
@@ -32,9 +32,11 @@ export const TRANSLATIONS: Record<string, Record<string, string>> = {
         contact_error_message: "Algo está faltando...\n Para que a mensagem chegue ao destino, complete os seguintes campos:",
         contact_error_fiels_name: "Nome",
         contact_error_fiels_email: "Email",
-        contact_erro_fields_phone: "Telefone",
+        contact_erro_fields_phone: "Celular",
         contact_error_fiels_message: "Mensagem",
-        contact_error_fiels_preferred_contact_method: "Melhor meio de contato"
+        contact_error_fiels_preferred_contact_method: "Melhor meio de contato",
+        contact_error_invalid_email: "Introduza um e-mail válido",
+        contact_error_invalid_phone: "Introduza um celular valido"
     },
     EN:{
         buttonDownloadCV: "My CV",
@@ -71,6 +73,8 @@ export const TRANSLATIONS: Record<string, Record<string, string>> = {
         contact_error_fiels_email: "Email",
         contact_erro_fields_phone: "Phone",
         contact_error_fiels_message: "Message",
-        contact_error_fiels_preferred_contact_method: "Preferred contact method"
+        contact_error_fiels_preferred_contact_method: "Preferred contact method",
+        contact_error_invalid_email: "Enter a valid email",
+        contact_error_invalid_phone: "Enter a valid phone number"
     }
 }
