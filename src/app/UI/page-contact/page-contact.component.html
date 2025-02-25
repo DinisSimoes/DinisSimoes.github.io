@@ -1,0 +1,74 @@
+<div class="max-w-lg mx-auto">
+    <!-- <h2 class="text-2xl font-semibold text-center mb-4">Contact Us</h2> -->
+    <h2 class="font-semibold text-center !text-lightText dark:!text-darkText">{{contact_title}}</h2>
+    
+    <!-- Nome Completo -->
+    <div class="flex flex-column gap-16 mb-4">
+      <input 
+        pInputText 
+        id="name" 
+        placeholder="{{placeholderName}}" 
+        [(ngModel)]="contactForm.name" 
+        class="w-full border border-gray-300 rounded-md p-2 text-black" 
+        required 
+        aria-required="true" />
+    </div>
+  
+    <!-- Email -->
+    <div class="flex flex-column gap-2 mb-4">
+      <input 
+        pInputText 
+        id="email" 
+        placeholder="{{placeholderEmail}}" 
+        type="email" 
+        [(ngModel)]="contactForm.email" 
+        class="w-full border border-gray-300 rounded-md p-2 text-black" 
+        
+        required 
+        aria-required="true" />
+    </div>
+  
+    <!-- Telefone -->
+    <div class="flex flex-column gap-2 mb-4">
+      <input 
+        pInputText 
+        id="phone" 
+        placeholder="{{placeholderPhone}}" 
+        type="tel" 
+        [(ngModel)]="contactForm.phone" 
+        class="w-full border border-gray-300 rounded-md p-2 text-black" />
+    </div>
+  
+    <!-- Mensagem -->
+    <div class="flex flex-column gap-2 mb-4">
+        <textarea 
+          id="message" 
+          rows="5" 
+          pInputTextarea 
+          placeholder="{{placeholderMessage}}" 
+          [(ngModel)]="contactForm.message" 
+          class="w-full border border-gray-300 rounded-md p-2 text-black"></textarea>
+    </div>
+  
+    <!-- Preferência de Contato -->
+    <div class="flex flex-col md:flex-row gap-2 align-items-center mb-4">
+      <!-- Dropdown -->
+      <div class="w-full md:w-8/12">
+        <p-dropdown 
+          id="contact-method" 
+          [options]="contactMethods" 
+          [(ngModel)]="contactForm.preferredContactMethod" 
+          placeholder="{{placeholderContactPreference}}" 
+          class="w-full"></p-dropdown>
+      </div>
+      
+      <!-- Botão de envio -->
+      <p-button 
+        label="{{btnSendMessage}}" 
+        icon="pi pi-send" 
+        class="p-button p-component w-full md:w-auto" 
+        (onClick)="sendMessage()">
+      </p-button>
+    </div>
+  </div>
+  

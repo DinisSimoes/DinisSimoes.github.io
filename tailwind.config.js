@@ -6,9 +6,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        lightBackground: "#F8F9FA", // Fundo claro
+        lightBackground: "#6C757D", // Fundo claro
         darkBackground: "#1A1A1A", // Fundo escuro
-        componentLightBackground: "#6C757D", // Fundo claro
+        componentLightBackground: "#d4d3d2", // Fundo claro
         componentDarkBackground: "#2C2C2C", // Fundo escuro
         lightText: "#343A40", // Texto escuro
         darkText: "#EAEAEA", // Texto claro

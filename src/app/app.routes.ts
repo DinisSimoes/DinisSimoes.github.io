@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomePageComponent } from './home-page/home-page.component';
-import { PageAboutComponent } from './page-about/page-about.component';
-import { PageLabComponent } from './page-lab/page-lab.component';
+import { HomePageComponent } from './UI/home-page/home-page.component';
+import { PageAboutComponent } from './UI/page-about/page-about.component';
+import { PageLabComponent } from './UI/page-lab/page-lab.component';
+import { PageContactComponent } from './UI/page-contact/page-contact.component';
 
 export const routes: Routes = [
-     { path: '', component: HomePageComponent },
-     { path: 'sobre', component: PageAboutComponent },
-     { path: 'servicos', component: PageLabComponent },
-     { path: 'contato', component: PageAboutComponent },
+     { path: '',  redirectTo: '/About', pathMatch: 'full' },
+     { path: 'About', component: PageAboutComponent },
+     { path: 'Lab', component: PageLabComponent },
+     { path: 'Contact', component: PageContactComponent },
   ];
   @NgModule({
     imports: [RouterModule.forRoot(routes)],

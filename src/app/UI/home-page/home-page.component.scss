@@ -1,0 +1,49 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+img {
+  background-color: #ddd;
+  border-radius: 50%;
+  height: 200px;
+  object-fit: cover;
+  width: 200px;
+}
+
+.swipe-indicator {
+  //position: absolute;
+  top: 50%;
+  left: 50%;
+  //transform: translate(-50%, -50%);
+  text-align: center;
+  //color: #fff;
+  font-size: 18px;
+  z-index: 10;
+}
+
+.arrow {
+  font-size: 24px;
+  display: inline-block;
+  margin: 0 10px;
+  animation: pulse 1s infinite;
+}
+
+.arrow.left::before {
+  content: "←";
+}
+
+.arrow.right::before {
+  content: "→";
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
