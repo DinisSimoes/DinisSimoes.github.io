@@ -1,8 +1,14 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  HostListener,
+  ViewChild,
+} from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { ButtonModule } from 'primeng/button';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three-stdlib';
 import { ThemeService } from '../../Services/theme.service';
@@ -49,8 +55,44 @@ export class HomePageComponent {
   constructor(
     private themeService: ThemeService,
     private languageService: LanguageService,
-    private menuNamesService: MenuNamesService
+    private menuNamesService: MenuNamesService,
+    private router: Router
   ) {}
+
+  @HostListener('window:wheel', ['$event'])
+  onMouseWheel(event: WheelEvent) {
+    if (window.innerWidth > 768) {
+      if (event.deltaY > 0) {
+        this.navigateNext();
+      } else {
+        this.navigatePrev();
+      }
+    }
+  }
+
+  currentIndex = 0;
+  navigateNext() {
+    if (this.currentIndex < this.menuList.length - 1) {
+      this.currentIndex++;
+      this.router.navigate([this.menuList[this.currentIndex].name]);
+    }
+  }
+
+  navigatePrev() {
+    if (this.currentIndex > 0) {
+      this.currentIndex--;
+      this.router.navigate([this.menuList[this.currentIndex].name]);
+    }
+  }
+
+  navigateToComponent(index: number) {
+    const nextMenu = this.menuList[index];
+    console.log(nextMenu);
+    if (nextMenu) {
+      this.component_name = nextMenu.description;
+      this.activeComponent = nextMenu.name as menu_enum;
+    }
+  }
 
   ngOnInit() {
     this.currentTheme = this.themeService.getTheme();
@@ -164,6 +206,7 @@ export class HomePageComponent {
   menuClick(menu: menus_name) {
     this.component_name = menu.description;
     this.setActiveComponent(menu.name as menu_enum);
+    console.log(this.activeComponent);
   }
 
   setActiveComponent(menu: menu_enum) {
