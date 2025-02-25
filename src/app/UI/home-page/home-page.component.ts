@@ -55,6 +55,7 @@ export class HomePageComponent implements AfterViewInit {
   menu_enum = menu_enum;
   component_name = '';
   menuList: menus_name[] = [];
+  currentYear: number = new Date().getFullYear();
 
   constructor(
     private themeService: ThemeService,
@@ -129,7 +130,6 @@ export class HomePageComponent implements AfterViewInit {
 
     this.menuList = this.menuNamesService.getMenuList();
     this.component_name = this.menuList[0].description;
-    this.init3DModel();
 
     this.languageService.language$.subscribe(() => {
       this.menuList = this.menuNamesService.getMenuList();
@@ -165,6 +165,10 @@ export class HomePageComponent implements AfterViewInit {
     return this.languageService.getTranslation('home_swipe');
   }
 
+  get all_rights(): string{
+    return this.languageService.getTranslation('home_footer_all_rights');
+  }
+
   isMobile(): boolean {
     return window.innerWidth <= 768;
   }
@@ -178,53 +182,6 @@ export class HomePageComponent implements AfterViewInit {
     const newLanguage = event.checked ? 'EN' : 'PT';
     this.languageService.setLanguage(newLanguage);
     console.log(this.languageService.getLanguage());
-  }
-
-  init3DModel() {
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(
-      75,
-      window.innerWidth / 500,
-      0.1,
-      1000
-    );
-    const renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, 500);
-
-    const light = new THREE.DirectionalLight(0xffffff, 1);
-    light.position.set(5, 10, 7).normalize();
-    scene.add(light);
-
-    const loader = new GLTFLoader();
-    loader.load(
-      '/my_avatar.glb', // Certifique-se de que o caminho está correto
-      (gltf) => {
-        const avatar = gltf.scene;
-        console.log(avatar);
-        avatar.scale.set(1, 1, 1); // Ajuste o tamanho conforme necessário
-        scene.add(avatar);
-
-        avatar.position.set(0, -3.5, 0); // Move o modelo para alinhar a cabeça no centro
-        avatar.scale.set(3, 3, 3); // Aumenta o tamanho do modelo, se necessário
-
-        // Ajuste a câmera para focar no rosto
-        camera.position.set(0, 1.6, 1); // Altura e distância da câmera
-        camera.lookAt(0, 1.6, 0);
-      },
-      undefined,
-      (error) => {
-        console.error('Erro ao carregar o modelo:', error);
-      }
-    );
-
-    camera.position.z = 5;
-
-    function animate() {
-      requestAnimationFrame(animate);
-      renderer.render(scene, camera);
-    }
-
-    animate();
   }
 
   menuClick(menu: menus_name) {

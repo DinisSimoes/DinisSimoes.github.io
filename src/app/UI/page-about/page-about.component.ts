@@ -33,10 +33,6 @@ constructor(private languageService: LanguageService) { }
     return this.languageService.getTranslation('about_content2');
   }
 
-  get about_habilities(): string {
-    return this.languageService.getTranslation('about_habilities');
-  }
-
   get about_skill(): string {
     return this.languageService.getTranslation('about_skill');
   }
