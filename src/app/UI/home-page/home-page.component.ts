@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   ChangeDetectorRef,
   Component,
   ElementRef,
@@ -22,6 +23,8 @@ import { menus_name } from '../../Models/menus_name';
 import { MenuNamesService } from '../../Services/menu-names.service';
 import { CommonModule } from '@angular/common';
 import { PageAboutComponent } from '../page-about/page-about.component';
+import { HammerModule } from '@angular/platform-browser';
+import Hammer from 'hammerjs';
 
 @Component({
   selector: 'app-home-page',
@@ -37,11 +40,12 @@ import { PageAboutComponent } from '../page-about/page-about.component';
     MatListModule,
     CommonModule,
     PageAboutComponent,
+    HammerModule,
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
 })
-export class HomePageComponent {
+export class HomePageComponent implements AfterViewInit {
   currentTheme: 'light' | 'dark' = 'light';
   currentLanguage: 'PT' | 'EN' = 'PT';
   currentThemeToogle = false;
@@ -82,6 +86,18 @@ export class HomePageComponent {
     if (this.currentIndex > 0) {
       this.currentIndex--;
       this.router.navigate([this.menuList[this.currentIndex].name]);
+    }
+  }
+
+  @ViewChild('swipeContainer') swipeContainer!: ElementRef;
+
+  ngAfterViewInit() {
+    if (window.innerWidth <= 768) {
+      // Apenas para dispositivos móveis
+      const hammer = new Hammer(this.swipeContainer.nativeElement);
+
+      hammer.on('swipeleft', () => this.navigateNext());
+      hammer.on('swiperight', () => this.navigatePrev());
     }
   }
 
@@ -145,13 +161,21 @@ export class HomePageComponent {
     return this.languageService.getTranslation('home_resume_4');
   }
 
+  get home_swipe(): string {
+    return this.languageService.getTranslation('home_swipe');
+  }
+
+  isMobile(): boolean {
+    return window.innerWidth <= 768;
+  }
+
   toggleTheme(event: any): void {
-    const newTheme = event.checked ? 'dark' : 'light'; // Define o tema baseado no toggle
+    const newTheme = event.checked ? 'dark' : 'light';
     this.themeService.setTheme(newTheme);
   }
 
   toggleLanguage(event: any): void {
-    const newLanguage = event.checked ? 'EN' : 'PT'; // Define o idioma baseado no toggle
+    const newLanguage = event.checked ? 'EN' : 'PT';
     this.languageService.setLanguage(newLanguage);
     console.log(this.languageService.getLanguage());
   }
