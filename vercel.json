@@ -9,13 +9,21 @@
     ],
     "routes": [
       {
+        "src": "/assets/(.*)",
+        "dest": "/assets/$1"
+      },
+      {
+        "src": "/(.*)\\.(js|css|ico|png|jpg|jpeg|gif|svg|woff2|woff|ttf|otf|eot)",
+        "dest": "/$1.$2"
+      },
+      {
         "src": "/(.*)",
         "dest": "/index.html"
       }
     ],
     "headers": [
       {
-        "source": "/(.*).js",
+        "source": "/(.*)\\.js",
         "headers": [
           {
             "key": "Content-Type",
