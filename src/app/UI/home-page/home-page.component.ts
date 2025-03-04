@@ -88,6 +88,7 @@ export class HomePageComponent implements AfterViewInit {
 
   private startX: number = 0;
   private endX: number = 0;
+  
   ngAfterViewInit() {
     if (window.innerWidth <= 768) {
       // Apenas para dispositivos móveis
