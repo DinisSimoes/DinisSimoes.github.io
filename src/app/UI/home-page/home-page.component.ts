@@ -1,6 +1,5 @@
 import {
   AfterViewInit,
-  ChangeDetectorRef,
   Component,
   ElementRef,
   HostListener,
@@ -10,8 +9,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { ButtonModule } from 'primeng/button';
 import { Router, RouterModule } from '@angular/router';
-import * as THREE from 'three';
-import { GLTFLoader } from 'three-stdlib';
 import { ThemeService } from '../../Services/theme.service';
 import { FormsModule } from '@angular/forms';
 import { ToggleButtonModule } from 'primeng/togglebutton';
@@ -23,8 +20,6 @@ import { menus_name } from '../../Models/menus_name';
 import { MenuNamesService } from '../../Services/menu-names.service';
 import { CommonModule } from '@angular/common';
 import { PageAboutComponent } from '../page-about/page-about.component';
-import { HammerModule } from '@angular/platform-browser';
-import Hammer from 'hammerjs';
 
 @Component({
   selector: 'app-home-page',
@@ -39,8 +34,7 @@ import Hammer from 'hammerjs';
     MatSidenavModule,
     MatListModule,
     CommonModule,
-    PageAboutComponent,
-    HammerModule,
+    PageAboutComponent
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
@@ -92,13 +86,31 @@ export class HomePageComponent implements AfterViewInit {
 
   @ViewChild('swipeContainer') swipeContainer!: ElementRef;
 
+  private startX: number = 0;
+  private endX: number = 0;
   ngAfterViewInit() {
     if (window.innerWidth <= 768) {
       // Apenas para dispositivos móveis
-      const hammer = new Hammer(this.swipeContainer.nativeElement);
+      const swipeElement = this.swipeContainer.nativeElement;
 
-      hammer.on('swipeleft', () => this.navigateNext());
-      hammer.on('swiperight', () => this.navigatePrev());
+      swipeElement.addEventListener('touchstart', (event: TouchEvent) => {
+        this.startX = event.touches[0].clientX;
+      });
+
+      swipeElement.addEventListener('touchend', (event: TouchEvent) => {
+        this.endX = event.changedTouches[0].clientX;
+        this.handleSwipe();
+      });
+    }
+  }
+
+  handleSwipe() {
+    if (this.startX > this.endX + 50) {
+      // Deslize para a esquerda
+      this.navigateNext();
+    } else if (this.startX < this.endX - 50) {
+      // Deslize para a direita
+      this.navigatePrev();
     }
   }
 
