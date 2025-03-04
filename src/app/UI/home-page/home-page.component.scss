@@ -21,22 +21,22 @@ img {
   z-index: 10;
 }
 
-.arrow {
-  font-size: 1.5rem;
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  margin: 0 10px;
-  animation: pulse 1s infinite;
-}
+// .arrow {
+//   font-size: 1.5rem;
+//   display: inline-block;
+//   width: 30px;
+//   height: 30px;
+//   margin: 0 10px;
+//   animation: pulse 1s infinite;
+// }
 
-.arrow.left::before {
-  content: "←";
-}
+// .arrow.left::before {
+//   content: "←";
+// }
 
-.arrow.right::before {
-  content: "→";
-}
+// .arrow.right::before {
+//   content: "→";
+// }
 
 @keyframes pulse {
   0% {
