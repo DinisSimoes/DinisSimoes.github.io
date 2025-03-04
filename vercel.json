@@ -4,13 +4,33 @@
       {
         "src": "package.json",
         "use": "@vercel/static-build",
-        "config": { "distDir": "dist/portfolio" }
+        "config": { "distDir": "docs" }
       }
     ],
     "routes": [
       {
+        "src": "/assets/(.*)",
+        "dest": "/assets/$1"
+      },
+      {
+        "src": "/(.*)\\.(js|css|ico|png|jpg|jpeg|gif|svg|woff2|woff|ttf|otf|eot)",
+        "dest": "/$1.$2"
+      },
+      {
         "src": "/(.*)",
-        "dest": "/"
+        "dest": "/index.html"
+      }
+    ],
+    "headers": [
+      {
+        "source": "/(.*)\\.js",
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "application/javascript"
+          }
+        ]
       }
     ]
   }
+  
